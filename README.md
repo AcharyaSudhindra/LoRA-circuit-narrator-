@@ -96,8 +96,8 @@ circuit-story-llm/
 ### Step 1 — Clone the repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/circuit-story-llm.git
-cd circuit-story-llm
+git clone https://github.com/YOUR_USERNAME/LoRA-circuit-narrator.git
+cd LoRA-circuit-narrator
 ```
 
 ### Step 2 — Install dependencies
