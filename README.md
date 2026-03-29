@@ -1,4 +1,4 @@
-# Circuit Story LLM
+# LoRA Circuit Narrator
 
 <div align="center">
 
@@ -21,7 +21,7 @@
 
 ## Overview
 
-**Circuit Story LLM** is a domain-specific language model fine-tuned on `EleutherAI/gpt-neo-125M` using **Low-Rank Adaptation (LoRA)** to explain digital electronics and VLSI design concepts through creative analogies and storytelling.
+**LoRA Circuit Narrator llm** is a domain-specific language model fine-tuned on `EleutherAI/gpt-neo-125M` using **Low-Rank Adaptation (LoRA)** to explain digital electronics and VLSI design concepts through creative analogies and storytelling.
 
 The model was trained on a hand-crafted dataset of around **300 prompt-response pairs** covering topics from basic logic gates , memory systems, CPU microarchitecture, embedded systems, semiconductor physics, and high-speed communication protocols.
 
