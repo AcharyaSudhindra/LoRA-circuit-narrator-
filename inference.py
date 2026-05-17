@@ -15,7 +15,20 @@ generator = pipeline("text-generation", model=model, tokenizer=tokenizer)
 
 # Prompt
 prompt = "Explain a flip-flop in a story"
+grounded_prompt = (
+    "You explain digital circuits in very simple terms. "
+    "Stay factual. If unsure, say you are unsure.\n"
+    f"Q: {prompt.strip()}\nA:"
+)
 
 # Generate output
-output = generator(prompt, max_length=100, do_sample=True, temperature=0.7)
-print(output[0]["generated_text"])
+output = generator(
+    grounded_prompt,
+    max_new_tokens=100,
+    do_sample=False,
+    repetition_penalty=1.15,
+    no_repeat_ngram_size=3,
+    eos_token_id=tokenizer.eos_token_id,
+    pad_token_id=tokenizer.eos_token_id,
+)
+print(output[0]["generated_text"].split("A:")[-1].strip())
