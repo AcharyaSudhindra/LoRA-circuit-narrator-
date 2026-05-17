@@ -1,9 +1,14 @@
+from pathlib import Path
+from peft import PeftModel
 from transformers import pipeline, AutoTokenizer, AutoModelForCausalLM
 
-# Load tokenizer and model directly from local folder
-model_path = "./results"
-tokenizer = AutoTokenizer.from_pretrained(model_path)
-model = AutoModelForCausalLM.from_pretrained(model_path)
+# Load base model and merge LoRA adapter from local results folder
+base_model_name = "EleutherAI/gpt-neo-125M"
+model_path = Path(__file__).resolve().parent / "results"
+tokenizer = AutoTokenizer.from_pretrained(base_model_name)
+tokenizer.pad_token = tokenizer.eos_token
+base_model = AutoModelForCausalLM.from_pretrained(base_model_name)
+model = PeftModel.from_pretrained(base_model, str(model_path)).merge_and_unload()
 
 # Create pipeline
 generator = pipeline("text-generation", model=model, tokenizer=tokenizer)

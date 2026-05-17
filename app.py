@@ -1,15 +1,16 @@
 import gradio as gr
 from peft import PeftModel
 from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
+from pathlib import Path
 
 BASE_MODEL = 'EleutherAI/gpt-neo-125M'
-LORA_PATH = r'C:\python\circuit-story\results'
+LORA_PATH = Path(__file__).resolve().parent / "results"
 
 print('Loading model...')
 tokenizer = AutoTokenizer.from_pretrained(BASE_MODEL)
 tokenizer.pad_token = tokenizer.eos_token
 base_model = AutoModelForCausalLM.from_pretrained(BASE_MODEL)
-model = PeftModel.from_pretrained(base_model, LORA_PATH)
+model = PeftModel.from_pretrained(base_model, str(LORA_PATH))
 model = model.merge_and_unload()
 generator = pipeline('text-generation', model=model, tokenizer=tokenizer)
 print('Ready!')
